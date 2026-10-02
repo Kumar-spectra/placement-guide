@@ -1,0 +1,103 @@
+# Placement Guide — Database Schema Documentation
+
+## Database Schema Tables
+
+### 1. `users`
+- `id` (INTEGER PRIMARY KEY)
+- `name` (TEXT)
+- `email` (TEXT UNIQUE)
+- `password_hash` (TEXT)
+- `role` (TEXT: 'student' | 'admin')
+- `college` (TEXT)
+- `degree` (TEXT)
+- `branch` (TEXT)
+- `graduation_year` (INTEGER)
+- `target_role` (TEXT)
+- `target_companies` (TEXT)
+- `skills` (TEXT)
+- `preparation_level` (TEXT)
+- `created_at` (DATETIME)
+
+### 2. `companies`
+- `id` (INTEGER PRIMARY KEY)
+- `name` (TEXT)
+- `slug` (TEXT UNIQUE)
+- `logo_url` (TEXT)
+- `description` (TEXT)
+- `website` (TEXT)
+- `industry` (TEXT)
+- `difficulty` (TEXT)
+- `hiring_type` (TEXT)
+- `popular_roles` (TEXT)
+- `eligibility` (TEXT)
+- `interview_overview` (TEXT)
+
+### 3. `rounds`
+- `id` (INTEGER PRIMARY KEY)
+- `company_id` (INTEGER FK)
+- `name` (TEXT)
+- `description` (TEXT)
+- `typical_topics` (TEXT)
+- `question_types` (TEXT)
+- `difficulty` (TEXT)
+- `preparation_tips` (TEXT)
+- `order_number` (INTEGER)
+
+### 4. `questions`
+- `id` (INTEGER PRIMARY KEY)
+- `question` (TEXT)
+- `answer` (TEXT)
+- `topic` (TEXT)
+- `subtopic` (TEXT)
+- `difficulty` (TEXT)
+- `question_type` (TEXT)
+- `source` (TEXT)
+- `interview_tip` (TEXT)
+- `code_snippet` (TEXT)
+- `tags` (TEXT)
+
+### 5. `company_questions`
+- `id` (INTEGER PRIMARY KEY)
+- `company_id` (INTEGER FK)
+- `question_id` (INTEGER FK)
+- `role_name` (TEXT)
+- `reported_year` (INTEGER)
+- `frequency_label` (TEXT)
+- `report_count` (INTEGER)
+
+### 6. `coding_problems`
+- `id` (INTEGER PRIMARY KEY)
+- `title` (TEXT)
+- `slug` (TEXT UNIQUE)
+- `difficulty` (TEXT)
+- `topic` (TEXT)
+- `description` (TEXT)
+- `examples` (TEXT JSON)
+- `constraints` (TEXT)
+- `starter_code` (TEXT)
+- `test_cases` (TEXT JSON)
+- `solution_code` (TEXT)
+
+### 7. `interview_experiences`
+- `id` (INTEGER PRIMARY KEY)
+- `user_id` (INTEGER FK)
+- `author_name` (TEXT)
+- `college` (TEXT)
+- `company_id` (INTEGER FK)
+- `role_title` (TEXT)
+- `year` (INTEGER)
+- `difficulty` (TEXT)
+- `selection_result` (TEXT)
+- `rounds_data` (TEXT JSON)
+- `questions_summary` (TEXT)
+- `additional_tips` (TEXT)
+- `status` (TEXT: 'approved' | 'pending' | 'rejected')
+
+### 8. `roadmaps`
+- `id` (INTEGER PRIMARY KEY)
+- `user_id` (INTEGER)
+- `title` (TEXT)
+- `target_role` (TEXT)
+- `target_companies` (TEXT)
+- `duration_days` (INTEGER)
+- `structure` (TEXT JSON)
